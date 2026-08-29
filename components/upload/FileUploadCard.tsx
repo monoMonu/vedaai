@@ -63,7 +63,7 @@ export function FileUploadCard({
           onClick={() => fileInputRef.current?.click()}
           className="border-2 border-dashed border-border hover:border-primary/60 bg-card/70 hover:bg-card rounded-3xl p-8 flex flex-col items-center justify-center gap-3 cursor-pointer transition-all duration-200 shadow-xs hover:shadow-md group"
         >
-          <div className="w-12 h-12 rounded-2xl bg-muted group-hover:bg-accent flex items-center justify-center text-muted-foreground group-hover:text-primary transition-colors">
+          <div className="w-12 h-12 rounded-2xl bg-muted group-hover:bg-accent flex items-center justify-center text-foreground group-hover:text-primary transition-colors">
             <Upload className="w-5 h-5" />
           </div>
 
@@ -76,8 +76,8 @@ export function FileUploadCard({
         </div>
       ) : (
         // Filled File State
-        <div className="border-2 border-dashed border-border bg-card/60 rounded-3xl p-6 sm:p-8 flex items-center justify-center">
-          <div className="w-full bg-card rounded-2xl border border-border p-4 flex items-center justify-between shadow-xs relative group">
+        <div className="border-2 border-dashed border-border bg-card/70 rounded-3xl p-8 py-12 flex items-center justify-center">
+          <div className="w-full bg-card rounded-2xl border border-border p-4 py-5 flex items-center justify-between shadow-xs relative group">
             <div className="flex items-center gap-3.5 overflow-hidden">
               <div className="w-11 h-11 rounded-xl bg-rose-50 border border-rose-100 flex items-center justify-center text-rose-500 shrink-0">
                 <FileText className="w-6 h-6" />
@@ -97,7 +97,7 @@ export function FileUploadCard({
                 e.stopPropagation();
                 onRemove();
               }}
-              className="w-7 h-7 rounded-full bg-neutral-600 hover:bg-neutral-800 text-white flex items-center justify-center transition-colors shrink-0 cursor-pointer shadow-xs"
+              className="w-7 h-7 rounded-full bg-neutral-600 hover:bg-neutral-800 text-white flex items-center justify-center transition-colors shrink-0 cursor-pointer shadow-xs absolute -top-2 -right-2"
               title="Remove file"
             >
               <X className="w-4 h-4" />

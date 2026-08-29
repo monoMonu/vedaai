@@ -8,40 +8,47 @@ import {
   Bell,
   Sparkles,
   ChevronDown,
+  Menu,
 } from "lucide-react";
 import { useAssessment } from "@/context/AssessmentContext";
+import Image from "next/image";
 
 export function Header() {
-  const { resetAssessment } = useAssessment();
+  const { resetAssessment, toggleSidebar } = useAssessment();
 
   return (
-    <header className="h-16 border-b border-border rounded-2xl m-3 bg-card/95 backdrop-blur-md px-4 sm:px-6 flex items-center justify-between sticky top-0 z-30">
-      {/* Left Breadcrumb */}
+    <header className="h-16 border-b border-border rounded-2xl m-3 bg-card/95 backdrop-blur-md px-4 sm:px-6 flex items-center justify-between sticky top-0 z-30 shadow-2xs">
+      {/* Left Breadcrumb / Brand */}
       <div className="flex items-center gap-3">
         <button
           onClick={resetAssessment}
-          className="p-2 rounded-lg hover:bg-muted text-neutral-600 hover:text-foreground transition-colors cursor-pointer"
+          className="p-1.5 sm:p-2 rounded-lg hover:bg-muted text-foreground transition-colors cursor-pointer"
           title="Back to Upload"
         >
           <ArrowLeft className="w-5 h-5" />
         </button>
-        <div className="flex items-center gap-2 text-sm font-medium text-neutral-700">
-          <FileText className="w-4 h-4 text-muted-foreground" />
-          <span>Exams</span>
+        <div className="flex items-center gap-2">
+          <span className="text-base font-bold text-foreground md:hidden">
+            VedaAI
+          </span>
+          <div className="hidden md:flex items-center gap-2 text-sm font-medium text-foreground">
+            <FileText className="w-4 h-4 text-foreground" />
+            <span>Exams</span>
+          </div>
         </div>
       </div>
 
       {/* Right User Actions */}
       <div className="flex items-center gap-2 sm:gap-4">
         <button
-          className="p-2 rounded-full hover:bg-muted text-muted-foreground hover:text-foreground transition-colors"
+          className="hidden sm:inline-flex p-2 rounded-full hover:bg-muted text-foreground transition-colors cursor-pointer"
           title="Help & Documentation"
         >
           <HelpCircle className="w-5 h-5" />
         </button>
 
         <button
-          className="p-2 rounded-full hover:bg-muted text-muted-foreground hover:text-foreground transition-colors relative"
+          className="p-2 rounded-full hover:bg-muted text-foreground transition-colors relative cursor-pointer"
           title="Notifications"
         >
           <Bell className="w-5 h-5" />
@@ -49,22 +56,35 @@ export function Header() {
         </button>
 
         <button
-          className="p-2 rounded-full hover:bg-muted text-muted-foreground hover:text-foreground transition-colors"
+          className="hidden sm:inline-flex p-2 rounded-full hover:bg-muted text-foreground transition-colors cursor-pointer"
           title="AI Assistant"
         >
-          <Sparkles className="w-5 h-5 text-amber-500" />
+          <Sparkles className="w-5 h-5" />
         </button>
 
         {/* User Profile */}
-        <div className="flex items-center gap-2.5 pl-2 sm:pl-3 border-l border-border">
-          <div className="w-8 h-8 rounded-full bg-neutral-900 text-white flex items-center justify-center font-bold text-xs shadow-sm overflow-hidden ring-2 ring-border">
-            <span className="text-amber-300">M</span>
-          </div>
+        <div className="flex items-center gap-2.5 sm:pl-2">
+          <Image
+            src="https://picsum.photos/200"
+            alt="User"
+            width={500}
+            height={500}
+            className="rounded-full w-8 h-8"
+          />
           <span className="text-sm font-semibold text-foreground hidden md:inline-block">
             Monu
           </span>
           <ChevronDown className="w-4 h-4 text-muted-foreground hidden md:inline-block" />
         </div>
+
+        {/* Mobile Sidebar Hamburger Toggle */}
+        <button
+          onClick={toggleSidebar}
+          className="p-2 rounded-lg hover:bg-muted text-foreground md:hidden transition-colors cursor-pointer"
+          title="Toggle Navigation Menu"
+        >
+          <Menu className="w-5 h-5" />
+        </button>
       </div>
     </header>
   );

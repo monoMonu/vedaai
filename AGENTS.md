@@ -8,86 +8,25 @@ This block is written and re-added by `next dev` — verify at `node_modules/nex
 
 <!-- END:nextjs-agent-rules -->
 
-# Project Instructions & Coding Standards: Veda AI Assessment Assistant
+# Veda AI Assessment Assistant
 
-## 1. Core Mission & Scope
-Build an AI-powered Assessment Extraction, Handwritten Answer Sheet Localization, and Automated Grading web application for teachers matching the provided VedaAI Figma design.
+## Project Requirements
+- **Dual File Upload & Progress**: Upload question paper and handwritten student answer sheet with stepped progress.
+- **Ordered Question Extraction**: Extract every question in exact printed sequence.
+- **Decompose Labelled Sub-Parts**: Treat labelled sub-parts as separate questions (e.g. `11 (a)` and `11 (b)` are two independent entries).
+- **Preserve Numbering**: Maintain original numbering and labels (`1`, `2`, `11 a.`, `11 b.`).
+- **Out-of-Order Answers**: Accurately detect and map answers attempted out of sequence.
+- **Unanswered Questions**: Flag omitted questions as `unanswered` (award 0 marks with omission feedback).
+- **Unmatched Answers**: Capture extra handwritten responses into `unmatchedAnswers`.
+- **Bounding Box Localization**: Highlight regions with normalized coordinates `[ymin, xmin, ymax, xmax]`, neon glowing border, and docked `Q[x]` badges.
+- **Multi-Page Spans**: Support answers that span across page breaks with separate bounding boxes per page.
+- **Automated Grading & Feedback**: Calculate question-level scores, total percentage, and AI feedback.
 
-## 2. Technology Stack (Free Tier & Latest Versions)
-- **Framework**: Next.js 16.3.3 (App Router)
-- **Runtime & UI**: React 19.2.8, React DOM 19.2.8
-- **Language**: TypeScript 5.x (Strict mode, zero `any` policy)
-- **Styling**: Tailwind CSS v4 (`@tailwindcss/postcss`) + Vanilla CSS variables for design tokens
-- **Icons**: `lucide-react`
-- **PDF Engine**: Mozilla `pdfjs-dist` (client-side canvas rendering, zero server cost)
-- **AI Multimodal Vision**: Google Gemini 1.5/2.0 Flash (Free Tier via Google AI Studio API) + preloaded fallback datasets
-- **Deployment Target**: Vercel (Free Hobby Tier)
+## Tech Stack & Constraints
+- **Stack**: Next.js 16 (App Router), React 19, TypeScript (strict, zero `any`), Tailwind CSS v4 (`@tailwindcss/postcss`) + CSS variables, `lucide-react`, `pdfjs-dist`, Google Gemini Flash API (`@google/genai`).
+- **Cost**: 100% Free Tier only (zero paid APIs or databases).
 
-## 3. Architecture & Project Structure
-Maintain a clean, modular architecture with strict separation of concerns:
-```
-src/
-├── app/
-│   ├── api/
-│   │   └── process-assessment/
-│   │       └── route.ts
-│   ├── layout.tsx
-│   ├── page.tsx
-│   └── globals.css
-├── components/
-│   ├── common/
-│   │   ├── Header.tsx
-│   │   └── Sidebar.tsx
-│   ├── upload/
-│   │   ├── UploadScreen.tsx
-│   │   └── FileUploadCard.tsx
-│   ├── processing/
-│   │   └── LoadingState.tsx
-│   ├── mapping/
-│   │   ├── MappingScreen.tsx
-│   │   ├── QuestionList.tsx
-│   │   ├── QuestionCard.tsx
-│   │   ├── AnswerSheetViewer.tsx
-│   │   ├── BoundingBoxOverlay.tsx
-│   │   └── AssessmentSummaryModal.tsx
-├── context/
-│   └── AssessmentContext.tsx
-├── types/
-│   └── assessment.ts
-├── lib/
-│   ├── gemini.ts
-│   ├── pdf-utils.ts
-│   └── sample-data.ts
-```
-
-## 4. Coding & Clean Code Rules
-1. **Self-Documenting Code**:
-   - Do not write redundant or trivial comments explaining obvious code.
-   - Only add comments when documenting non-obvious algorithms, mathematical calculations, or edge case constraints.
-   - Absolutely no decorative comment banners, ASCII boxes, divider lines (e.g., `// ----------------`, `/* ============= */`), or section headers inside code files.
-2. **Modular Components**:
-   - Each component must have a single responsibility.
-   - Keep UI components decoupled from AI/PDF processing logic through hooks and context.
-   - Reusable UI primitives must reside in `components/common/`.
-3. **Type Safety**:
-   - Define exact TypeScript interfaces for all data structures (`Question`, `SubQuestion`, `AnswerSpan`, `BoundingBox`, `AssessmentResult`).
-   - Avoid `any` or loose type assertions. Use discriminated unions where applicable.
-4. **State Management**:
-   - Use React Context / custom hooks for shared global assessment state.
-   - Keep local UI state (zoom levels, active question selection, tab switching) isolated to the consuming components.
-5. **Coordinate & Bounding Box System**:
-   - Store bounding boxes in normalized coordinates `[ymin, xmin, ymax, xmax]` (0.0 to 1.0 or 0 to 1000).
-   - Ensure dynamic SVG/Canvas overlay scaling functions correctly across window resizing, mobile viewports, and zoom levels.
-
-## 5. UI/UX & Figma Replication Standards
-- **Color Tokens**:
-  - Primary Orange: `#FF5E3A`
-  - Dark Charcoal / Sidebar: `#1A1D24` / `#232730`
-  - Active Green Badges: `#22C55E` / `#16A34A`
-  - Neutral Gray Background: `#F8F9FB` / `#FFFFFF`
-- **Responsive Layout**:
-  - Desktop: Sidebar + Split view (Left: Questions, Right: Answer Sheet).
-  - Mobile: Top navigation with segmented control `[ Questions | Answer Sheet ]`.
-- **Bidirectional Interactivity**:
-  - Selecting a question card smoothly scrolls to and highlights the corresponding answer bounding box on the correct page.
-  - Clicking on a bounding box in the answer viewer focuses and expands the corresponding question in the list.
+## Coding & Design Rules
+- **Clean Code**: Self-documenting code. No redundant comments, decorative banners, or divider lines.
+- **Design Tokens**: Primary Orange `#FF5E3A`, Peach Accent `#FFF1EE`, Background `#F8F9FB`, Dark Slate `#1A1D24` / `#232730`, Active Green `#22C55E`.
+- **Responsive & Interactive**: Match Figma desktop and mobile phone viewports. Bidirectional sync between question list and bounding box canvas.

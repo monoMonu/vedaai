@@ -38,9 +38,6 @@ export function QuestionList() {
                 (from question paper)
               </span>
             </h2>
-            <span className="px-2 py-0.5 rounded-full bg-muted text-muted-foreground text-xs font-semibold">
-              {result.questions.length}
-            </span>
           </div>
 
           {/* Expand / Collapse All */}

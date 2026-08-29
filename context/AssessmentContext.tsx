@@ -163,7 +163,7 @@ export function AssessmentProvider({
       }
 
       const parsed: AssessmentResult = data;
-      
+
       // Ensure the actual uploaded pages are linked to the result
       parsed.answerSheetPages = ansPages.length > 0 ? ansPages : [
         {
@@ -203,7 +203,6 @@ export function AssessmentProvider({
     setSelectedAnswerSpanId(null);
     setActivePage(1);
     setZoomLevel(100);
-    setIsSidebarCollapsed(false);
   }, []);
 
   return (

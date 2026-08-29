@@ -86,14 +86,14 @@ export function UploadScreen() {
 
         {/* Title Header */}
         <div className="text-center">
-          <h1 className="text-2xl sm:text-4xl font-extrabold text-foreground tracking-tight flex flex-wrap items-center justify-center gap-2">
+          <h1 className="text-2xl sm:text-4xl font-extrabold text-foreground tracking-tight flex flex-wrap items-center justify-center">
             <span>Upload</span>
-            <span className="relative px-3 py-1 bg-accent text-accent-foreground rounded-2xl border border-primary/20">
+            <span className="relative px-1 py-1 ml-2 sm:bg-accent sm:text-accent-foreground rounded-md bg-transparent text-foreground">
               Question Paper &amp; Answer Sheets
             </span>
           </h1>
           <p className="text-sm sm:text-base text-muted-foreground mt-2.5 font-normal">
-            Upload <span className="font-semibold text-foreground">both</span> files to get started
+            Upload both files to get started
           </p>
         </div>
 

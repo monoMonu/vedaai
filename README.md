@@ -1,36 +1,32 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Veda AI Assessment Assistant
 
-## Getting Started
+AI-powered question extraction, handwritten answer sheet localization, and automated grading platform for teachers.
 
-First, run the development server:
+---
 
+### 1. Approach
+- **Client-Side PDF Processing**: Renders multi-page PDFs directly to JPEG canvases in-browser via `pdfjs-dist` (zero server cost & lightweight payloads).
+- **AI Vision Pipeline**: Sends question paper and answer sheet images to Gemini Vision to extract questions in printed order, decompose sub-parts (`11a`, `11b`), map out-of-order handwriting, localize 2D bounding boxes `[ymin, xmin, ymax, xmax]`, and generate grades/feedback.
+- **Bi-Directional Dashboard**: Selecting a question highlights its bounding box with pan/zoom and page navigation, while clicking a box focuses the question.
+
+---
+
+### 2. AI Model & API Used
+- **Model**: `gemini-3.6-flash` (via Google GenAI SDK).
+- **Cost**: 100% Free Tier API key from Google AI Studio
+
+---
+
+### 3. Assumptions & Limitations
+- **Handwriting Quality**: Handwriting must be reasonably legible and well-lit.
+- **File Formats**: Supports PDF, PNG, JPG, and WebP up to ~15 pages per document.
+- **Platform**: Designed for desktop and mobile phone viewports matching Figma specifications.
+
+---
+
+### 4. Quick Start
 ```bash
+npm install
+# Set GEMINI_API_KEY in .env.local
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
-
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
-
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
-
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
-
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.

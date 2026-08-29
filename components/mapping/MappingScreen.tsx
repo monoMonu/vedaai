@@ -4,8 +4,6 @@ import React from "react";
 import { useAssessment } from "@/context/AssessmentContext";
 import { QuestionList } from "./QuestionList";
 import { AnswerSheetViewer } from "./AnswerSheetViewer";
-import { AssessmentSummaryModal } from "./AssessmentSummaryModal";
-import { Layers, FileText } from "lucide-react";
 
 export function MappingScreen() {
   const { activeMobileTab, setActiveMobileTab } = useAssessment();
@@ -13,39 +11,35 @@ export function MappingScreen() {
   return (
     <div className="flex-1 flex flex-col h-[calc(100vh-4rem)] overflow-hidden bg-background">
       {/* Mobile Top Segmented Tab Switcher (Matches Figma Phone Mockup) */}
-      <div className="md:hidden p-3 bg-card border-b border-border flex items-center justify-between gap-3">
-        <div className="flex-1 grid grid-cols-2 bg-muted p-1 rounded-2xl border border-border">
+      <div className="md:hidden mb-3 w-full bg-background flex items-center justify-center gap-3 px-4">
+        <div className="flex-1 grid grid-cols-2 bg-white p-1 rounded-full shadow-2xs">
           <button
             onClick={() => setActiveMobileTab("questions")}
-            className={`py-2 rounded-xl text-xs font-bold transition-all flex items-center justify-center gap-1.5 cursor-pointer ${activeMobileTab === "questions"
-              ? "bg-sidebar text-sidebar-foreground shadow-xs"
+            className={`py-2 rounded-full text-sm font-semibold transition-all text-center cursor-pointer ${activeMobileTab === "questions"
+              ? "bg-[#232730] text-white shadow-xs"
               : "text-muted-foreground hover:text-foreground"
               }`}
           >
-            <FileText className="w-3.5 h-3.5" />
-            <span>Questions</span>
+            Questions
           </button>
 
           <button
             onClick={() => setActiveMobileTab("answersheet")}
-            className={`py-2 rounded-xl text-xs font-bold transition-all flex items-center justify-center gap-1.5 cursor-pointer ${activeMobileTab === "answersheet"
-              ? "bg-sidebar text-sidebar-foreground shadow-xs"
+            className={`py-2 rounded-full text-sm font-semibold transition-all text-center cursor-pointer ${activeMobileTab === "answersheet"
+              ? "bg-[#232730] text-white shadow-xs"
               : "text-muted-foreground hover:text-foreground"
               }`}
           >
-            <Layers className="w-3.5 h-3.5" />
-            <span>Answer Sheet</span>
+            Answer Sheet
           </button>
         </div>
-
-        <AssessmentSummaryModal />
       </div>
 
       {/* Main Container */}
       <div className="flex-1 flex flex-col md:flex-row h-full overflow-hidden">
         {/* Left Questions Column */}
         <div
-          className={`w-full md:w-[46%] lg:w-[44%] xl:w-[42%] h-full flex flex-col p-3 pt-0 ${activeMobileTab === "questions" ? "flex" : "hidden md:flex"
+          className={`w-full md:w-[46%] lg:w-[44%] xl:w-[42%] h-full flex flex-col p-3 md:pr-0 pt-0 ${activeMobileTab === "questions" ? "flex" : "hidden md:flex"
             }`}
         >
           <QuestionList />

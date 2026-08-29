@@ -21,7 +21,7 @@ export function LoadingState() {
   }, [steps.length]);
 
   return (
-    <div className="flex-1 flex flex-col items-center justify-center min-h-[calc(100vh-4rem)] p-6 bg-background">
+    <div className="flex-1 flex flex-col items-center justify-center h-full p-6 mx-4 mb-4 rounded-2xl bg-sidebar shadow-lg">
       <div className="flex flex-col items-center max-w-sm text-center">
         {/* Animated Sparkling Stars Icon (Matches Figma) */}
         <div className="relative mb-8 flex items-center justify-center">
@@ -62,13 +62,12 @@ export function LoadingState() {
             return (
               <div
                 key={step}
-                className={`flex items-center gap-2.5 text-xs transition-opacity duration-300 ${
-                  isDone
-                    ? "text-muted-foreground font-normal"
-                    : isCurrent
+                className={`flex items-center gap-2.5 text-xs transition-opacity duration-300 ${isDone
+                  ? "text-muted-foreground font-normal"
+                  : isCurrent
                     ? "text-foreground font-semibold"
                     : "text-muted-foreground/40 font-normal"
-                }`}
+                  }`}
               >
                 {isDone ? (
                   <CheckCircle2 className="w-4 h-4 text-emerald-500 shrink-0" />
